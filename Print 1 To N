@@ -1,0 +1,20 @@
+// Print Numbers using recursion Starting from 1 to N
+#include<bits/stdc++.h>
+using namespace std;
+void print1ToN(int n)
+{
+    // base case
+    if(n == 0){
+        return ;
+    }
+    // recursive case
+    else{
+        // processing part
+        print1ToN(n-1);
+        cout<<(n);
+    }
+}
+int main()
+{
+    print1ToN(5);
+}
