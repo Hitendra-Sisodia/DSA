@@ -1,0 +1,20 @@
+// find 2 raise to power x 
+#include<bits/stdc++.h>
+using namespace std;
+int twoRaisePowerX(int n)
+{
+    // base case
+    if(n == 0){
+        return 1;
+    }
+    if(n == 1){
+        return 2;
+    }
+    // chottiproblem = 2
+    // baddiproblem = twoRaisePower(n-1)
+    return 2 * twoRaisePowerX(n-1);
+}
+int main()
+{
+    cout<<twoRaisePowerX(5);
+}
