@@ -1,0 +1,18 @@
+// factorial of number using recusrion
+#include<bits/stdc++.h>
+using namespace std;
+int factorial(int n)
+{
+    if(n == 0){
+        return 1;
+    }
+    else{
+        int chotiiProblem = n;
+        int baddiProblem = factorial(n-1);
+        return chotiiProblem * baddiProblem;
+    }
+}
+int main()
+{
+    cout<<factorial(5);
+}
