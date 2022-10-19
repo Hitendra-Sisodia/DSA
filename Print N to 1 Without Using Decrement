@@ -1,0 +1,20 @@
+// print N to 1 series without using decrement
+#include<bits/stdc++.h>
+using namespace std;
+void printSeries(int i,int n)
+{
+    // base case
+    if(i > n){
+        return ;
+    }
+    else{
+        printSeries(i+1,n);
+        cout<<i<<" ";
+    }
+}
+int main()
+{
+    int n = 5;
+    int i = 1;
+    printSeries(i,n);
+}
