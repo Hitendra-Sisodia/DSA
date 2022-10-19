@@ -1,0 +1,21 @@
+// print 1 to N series without using increment
+#include<bits/stdc++.h>
+using namespace std;
+void printSeries(int i,int n)
+{
+    // base case
+    if(i < 1){
+        return ;
+    }
+    // recursive case
+    else{
+        printSeries(i-1,n); 
+        cout<<i<<" ";
+    }
+}
+int main()
+{
+    int n = 5;
+    int i = n;
+    printSeries(i,n);
+}
