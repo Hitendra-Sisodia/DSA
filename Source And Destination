@@ -1,0 +1,16 @@
+// Starting from source reach towards destination
+#include<bits/stdc++.h>
+using namespace std;
+void sourceAndDestination(int src,int destination)
+{
+    if(src == destination){
+        cout<<"OP You reached";
+    }
+    sourceAndDestination(src+1,destination);
+}
+int main()
+{
+    int src = 1;
+    int destination = 100;
+    sourceAndDestination(src,destination);
+}
