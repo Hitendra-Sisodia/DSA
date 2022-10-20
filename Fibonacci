@@ -1,0 +1,20 @@
+// fibonacci series starting from 0th counting
+#include<bits/stdc++.h>
+using namespace std;
+int fibonacci(int n)
+{
+    // base case
+    if(n <= 1){
+        return n;
+    }
+    // recurive case
+    else{
+        int chottiproblem = fibonacci(n-1);
+        int baddiproblem = fibonacci(n-2);
+        return chottiproblem + baddiproblem;
+    }
+}
+int main()
+{
+    cout<<fibonacci(8);
+}
