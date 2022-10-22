@@ -1,0 +1,22 @@
+// revesre string using recursion
+#include<bits/stdc++.h>
+using namespace std;
+void reversestring(string &arr,int s,int e)
+{   
+    cout<<"Function call for: "<<arr<<endl;
+    // base case
+    if(s >= e){
+        return ;
+    }
+    // recursive case
+    else{
+        swap(arr[s],arr[e]);
+        reversestring(arr,s+1,e-1);
+    }
+}
+int main()
+{
+    string arr = "babbar";
+    reversestring(arr,0,6-1);
+    cout<<arr;
+}
