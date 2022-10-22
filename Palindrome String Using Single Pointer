@@ -1,0 +1,24 @@
+// check plaindrome using single pointer
+#include<bits/stdc++.h>
+using namespace std;
+bool palin(string arr,int s)
+{
+    // base case
+    if(s >= (arr.length() - 1 - s)){
+        return true;
+    }
+    if(arr[s] != arr[arr.length() - 1 - s]){
+        return false;
+    }
+    return palin(arr,s+1);
+}
+int main()
+{
+    string arr = "aabtfbaa";
+    if(palin(arr,0)){
+        cout<<"Palindrome String";
+    }
+    else{
+        cout<<"Non - Palindrome String";
+    }
+}
