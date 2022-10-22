@@ -1,0 +1,36 @@
+// calculating power of a raise to b
+#include<bits/stdc++.h>
+using namespace std;
+int power(int x,int nn)
+{
+    long long n = nn;
+    if(n == 0){
+        return 1;
+    }
+    if(n == 1){
+        return x;
+    }
+    if(n < 0){  // for handling -ve n
+        n = -n;
+        x = 1/x; 
+    }
+    if(x == -1){
+        if(n% 2 == 0){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
+    double ans = power(x,n/2);
+    if(n % 2 == 0){
+        return ans * ans;
+    }
+    else{
+        return x * ans * ans;
+    }
+}
+int main()
+{
+    cout<<"A raise to power B is: "<<power(2,8);
+}
