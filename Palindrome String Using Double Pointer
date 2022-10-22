@@ -1,0 +1,77 @@
+Method - I (Basic Recursive) : All test case may not pass
+
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isPalindrome(string str,int s,int e) {
+    if(s > e){
+        return true;
+    }
+    if(str[s] != str[e]){
+        return false;
+    }
+    return isPalindrome(str,s+1,e-1);
+}
+int main()
+{
+    string str = "aabbaa";
+    int s = 0;
+    int e = str.size() - 1;
+    cout<<isPalindrome(str,s,e);
+}
+
+
+
+Method - II (Recursive Solution)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+bool solve(string str,int s,int e){
+    if(s >= e){
+        return true;
+    }
+    if(tolower(str[s]) != tolower(str[e])){
+        return false;
+    }
+    return solve(str,s+1,e-1);
+}
+bool isPalindrome(string st) {
+    int s = 0;
+    int e = st.size() - 1;
+    string str = "";
+    for(int i = 0; i <= e ;i++){
+        if(isalnum(st[i])){
+            str = str + st[i];
+        }
+    }
+    cout<<str<<endl;
+    return solve(str,s,str.size() - 1);
+}
+int main()
+{
+    cout<<isPalindrome("A man, a plan, a canal: Panama");
+}
+
+
+
+Method - III (Iterative Solution)
+
+bool isPalindrome(string str) {
+    int s = 0;
+    int e = str.size() - 1;
+    while(s < e){
+        while(s < e && !isalnum(str[s])){
+            s++;
+        }
+        while(s < e && !isalnum(str[e])){
+            e--;
+        }
+        if(tolower(str[s]) != tolower(str[e])){
+            return false;
+        }
+        s++;
+        e--;
+    }
+    return true;
+}
