@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool binarysearch(int arr[],int s,int e,int key)
+{
+    // base case
+    if(s > e){
+        return false;
+    }
+    // mid case
+    int mid = s + (e-s)/2;
+    // key found case
+    if(arr[mid] == key){
+        return true;
+    }
+    // recursive call case
+    if(arr[mid] >  key){
+        binarysearch(arr,s,mid-1,key);
+    }
+    else{
+        binarysearch(arr,mid+1,e,key);
+    }
+}
+int main()
+{
+    int arr[] = {10,20,30,40,50};
+    if(binarysearch(arr,0,4,50)){
+        cout<<"Key found";
+    }
+    else{
+        cout<<"Key not found";
+    }
+}
