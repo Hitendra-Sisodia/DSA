@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+void bubblesort(int *arr,int e)
+{
+    // base case
+    if(e == 0){ // 0 means array exist nai kartha
+        return ;                // 1 means single element is always sorted
+    }
+    else{
+        // solve only one case and else part done by recusion
+        for(int i = 0 ; i < e ; i++){
+            if(arr[i] > arr[i+1]){
+                swap(arr[i],arr[i+1]);
+            }
+        }
+        // recursive call
+        bubblesort(arr,e - 1);
+    }
+}
+int main()
+{
+    int size = 5;
+    int arr[] = {50,10,100,30,40};
+    int e = size - 1;
+    bubblesort(arr,e);
+    for(int i = 0 ; i < 5 ; i++){
+        cout<<arr[i]<<" ";
+    }
+}
