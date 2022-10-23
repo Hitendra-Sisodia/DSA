@@ -1,0 +1,17 @@
+// print N to 1 using recursion head recusion
+#include<bits/stdc++.h>
+using namespace std;
+void printCounting(int N)
+{
+    // base case
+    if(N <= 0){
+        return ;
+    }
+    cout<<N<<" ";
+    printCounting(N-1);
+}
+int main()
+{
+    int N = 5;
+    printCounting(N);
+}
