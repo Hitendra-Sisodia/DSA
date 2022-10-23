@@ -1,0 +1,26 @@
+// selection sort using single pointer
+#include<bits/stdc++.h>
+using namespace std;
+void solve(int *arr,int e)
+{
+    if(e < 0){
+        return ;
+    }
+    solve(arr,e-1);
+    int min = e;
+    for(int j = e+1 ; j <= sizeof(arr) ; j++){
+        if(arr[j] < arr[min]){
+            min = j;
+        }
+    }
+    swap(arr[e],arr[min]);
+}
+int main()
+{
+    int arr[] = {120,20,2,3,1000};
+    int e = 4;
+    solve(arr,e);
+    for(int i = 0 ; i <= e ;i++){
+        cout<<arr[i]<<" ";
+    }
+}
