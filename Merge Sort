@@ -1,0 +1,67 @@
+// mergesort using recursion
+#include<bits/stdc++.h>
+using namespace std;
+void merge(int *arr,int s,int mid,int e)
+{
+    int n1 = mid - s + 1;
+    int n2 = e - mid;
+    int *arr1 = new int[n1];
+    int *arr2 = new int[n2];
+    int k = s;
+    // copy values in left array
+    for(int i = 0 ; i < n1 ; i++){
+        arr1[i] = arr[k];
+        k++;
+    }
+    // copy values in right sub array
+    for(int i = 0 ; i < n2 ; i++){
+        arr2[i] = arr[k];
+        k++;
+    }
+    // merge
+    int i = 0;
+    int j = 0;
+    k = s;
+    while(i < n1 && j < n2){
+        if(arr1[i] < arr2[j]){
+            arr[k] = arr1[i];
+            k++;
+            i++;
+        }
+        else{
+            arr[k] = arr2[j];
+            k++;
+            j++;
+        }
+    }
+    while(i < n1){
+        arr[k] = arr1[i];
+        k++;
+        i++;
+    }
+    while(j < n2){
+        arr[k] = arr2[j];
+        k++;
+        j++;
+    }
+}
+void mergeSort(int *arr,int s,int e)
+{
+    if(s >= e){
+        return ;
+    }
+    int mid = (s+e)/2;
+    mergeSort(arr,s,mid);
+    mergeSort(arr,mid+1,e);
+    merge(arr,s,mid,e);
+}
+int main()
+{
+    int arr[] = {20,40,20,20,10};
+    int s = 0;
+    int e = 4;
+    mergeSort(arr,s,e);
+    for(int i = 0 ; i < 5 ;i++){
+        cout<<arr[i]<<" ";
+    }
+}
