@@ -1,0 +1,40 @@
+// Unique permutations of array
+#include<bits/stdc++.h>
+using namespace std;
+void solve(vector<int> &arr,int index,vector<vector<int> > &ans)
+{
+    // base case
+    if(index >= arr.size()){
+        ans.push_back(arr);
+        return ;
+    }
+    unordered_set<int> m;
+    for(int i = index ; i < arr.size() ; i++){
+        if(m.find(arr[i]) != m.end()){
+            continue;
+        }
+        swap(arr[index],arr[i]);
+        m.insert(arr[index]);
+        solve(arr,index+1,ans);
+        swap(arr[index],arr[i]);
+    }
+}
+vector<vector<int> > permutation(vector<int> arr)
+{
+    vector<vector<int> > ans;
+    int index = 0;
+    solve(arr,index,ans);
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {1,0,1};
+    vector<vector<int> > finalans = permutation(arr);
+    for(auto it: finalans){
+        cout<<"[";
+        for(auto j : it){
+            cout<<j;
+        }
+        cout<<"]";
+    }
+}
