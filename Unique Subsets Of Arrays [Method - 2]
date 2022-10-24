@@ -1,0 +1,32 @@
+// find all unique subsets of a given array [Method - 2]
+#include<bits/stdc++.h>
+using namespace std;
+void uniqueSubSets(vector<int> arr,vector<int> &output,int index,vector<vector<int> > &ans)
+{
+    // No base case will required as we wait till each function in stack get's completed
+    ans.push_back(output);
+    // we have 0th 1th 2th 3rd 4th 5th i.e n-1 choices to pick up
+    for(int i = index ; i < arr.size() ; i++){
+        if(i > index && arr[i] == arr[i-1]){  // i > index, condition is used because we also give chance to push start index.
+            continue;
+        }
+        output.push_back(arr[i]);
+        uniqueSubSets(arr,output,i+1,ans);
+        output.pop_back();
+    }
+}
+int main()
+{
+    vector<int> arr = {1,1,3};
+    vector<vector<int> > ans;
+    vector<int> output;
+    int index = 0;
+    uniqueSubSets(arr,output,index,ans);
+    for(auto it : ans){
+        cout<<"[";
+        for(auto i : it){
+            cout<<i;
+        }
+        cout<<"]";
+    }
+}
