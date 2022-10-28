@@ -1,0 +1,41 @@
+// print all unique combinations/subsets with sum k[target]
+// Given: unique array + Repetition Allowed
+
+#include<bits/stdc++.h>
+using namespace std;
+void solve(vector<int> arr,vector<int> &output,int index,vector<vector<int> > &ans,int target)
+{
+    if(index >= arr.size()){
+        if(target == 0){
+            ans.push_back(output);
+        }
+        return ;
+    }
+    // include
+    output.push_back(arr[index]);
+    solve(arr,output,index+1,ans,target-arr[index]);
+    output.pop_back();
+    // exclude
+    solve(arr,output,index+1,ans,target);
+}
+vector<vector<int> > uniqueCombinations(vector<int> arr,int target)
+{
+    vector<vector<int> > ans;
+    vector<int> output;
+    int index = 0;
+    solve(arr,output,index,ans,target);
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {1,5,6,2};
+    int target = 6;
+    vector<vector<int> > finalans = uniqueCombinations(arr,target);
+    for(auto it: finalans){
+        cout<<"[";
+        for(auto i : it){
+            cout<<i;
+        }
+        cout<<"]";
+    }
+}
