@@ -1,5 +1,5 @@
 // print all unique combinations/subsets with sum k[target]
-// Given: unique array + Repetition Allowed
+// Given: unique array + Repetition NotAllowed
 
 #include<bits/stdc++.h>
 using namespace std;
