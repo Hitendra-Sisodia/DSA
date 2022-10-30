@@ -1,28 +1,34 @@
 // subsets sum
 #include<bits/stdc++.h>
 using namespace std;
-void subSetsSum(vector<int> arr,int sum,int index,vector<int> &ans)
+void solve(vector<int> arr,int sum,int index,vector<int> &ans)
 {
-    // base case
     if(index >= arr.size()){
         ans.push_back(sum);
         return ;
     }
-    // pick 
+    // include
     sum += arr[index];
-    subSetsSum(arr,sum,index+1,ans);
+    solve(arr,sum,index+1,ans);
     sum -= arr[index];
-    // don't pick
-    subSetsSum(arr,sum,index+1,ans);
+    // exclude
+    solve(arr,sum,index+1,ans);
+}
+vector<int> subSetsSum(vector<int> arr)
+{
+    vector<int> ans;
+    int sum = 0;
+    int index = 0;
+    solve(arr,sum,index,ans);
+    return ans;
 }
 int main()
 {
     vector<int> arr = {1,2,3};
-    vector<int> ans;
-    int sum = 0;
-    int index = 0;
-    subSetsSum(arr,sum,index,ans);
-    for(auto it:ans){
+    vector<int> finalans = subSetsSum(arr);
+    cout<<"[";
+    for(auto it: finalans){
         cout<<it<<" ";
     }
+    cout<<"]";
 }
