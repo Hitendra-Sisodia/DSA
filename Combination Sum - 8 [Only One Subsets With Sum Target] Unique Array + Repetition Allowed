@@ -1,0 +1,54 @@
+// print First one subsets with sum k/ target + unique Array + Repetition Allowed
+
+#include<bits/stdc++.h>
+using namespace std;
+bool solve(vector<int> arr,vector<int> output,int index,vector<vector<int> > &ans,int target)
+{
+    // base case
+    if(index >= arr.size()){ 
+        if(target == 0){
+            ans.push_back(output);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    // recursive case
+    // take it
+    if(arr[index] <= target){
+        output.push_back(arr[index]);
+        target -= arr[index];
+        if(solve(arr,output,index,ans,target)){
+            target += arr[index];
+            output.pop_back();
+            return true;
+        }
+    }
+    // don't include it
+    if(solve(arr,output,index+1,ans,target)){
+        return true;
+    }
+    return false;
+}
+vector<vector<int> > sumCombination(vector<int> arr,int target)
+{
+    vector<vector<int> > ans;
+    vector<int> output;
+    int index = 0;
+    solve(arr,output,index,ans,target);
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {2,3,4,7};
+    int target = 7;
+    vector<vector<int> > finalans = sumCombination(arr,target);
+    for(auto it: finalans){
+        cout<<"[";
+        for(auto i : it){
+            cout<<i;
+        }
+        cout<<"]";
+    }
+}
