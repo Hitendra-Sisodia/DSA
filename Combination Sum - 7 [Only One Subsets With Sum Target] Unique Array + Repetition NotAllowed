@@ -1,0 +1,51 @@
+// print First one subsequence with sum k/ target
+// important algo for printing only one subset
+
+#include<bits/stdc++.h>
+using namespace std;
+bool solve(vector<int> arr,vector<int> &output,int index,vector<vector<int> > &ans,int target)
+{
+    if(index >= arr.size()){
+        if(target == 0){
+            ans.push_back(output);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    // include
+    output.push_back(arr[index]);
+    target -= arr[index];
+    if(solve(arr,output,index+1,ans,target) == true){
+        return true;
+    }
+    target += arr[index];
+    output.pop_back();
+    // exclude
+    if(solve(arr,output,index+1,ans,target) == true){
+        return true;
+    }
+    return false;
+}
+vector<vector<int> > oneSubsets(vector<int> arr,int k)
+{
+    vector<vector<int> > ans;
+    vector<int> output;
+    int index = 0;
+    solve(arr,output,index,ans,k);
+    return ans;
+}
+int main()
+{
+    vector<int> arr = {1,1,2};
+    int k = 2;
+    vector<vector<int> > finalans = oneSubsets(arr,k);
+    for(auto it: finalans){
+        cout<<"[";
+        for(auto i: it){
+            cout<<i;
+        }
+        cout<<"]";
+    }
+}
