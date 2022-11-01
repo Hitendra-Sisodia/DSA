@@ -1,4 +1,4 @@
-// print First one subsequence with sum k/ target
+// print First one subset with sum k/ target
 // important algo for printing only one subset
 
 #include<bits/stdc++.h>
