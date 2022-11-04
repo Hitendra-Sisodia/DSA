@@ -1,0 +1,100 @@
+// N queen problem
+// Rule1: Each row contain atlest 1 queen.
+// Rule2: Each cols contain atleat 1 queen.
+// Rule3: It follows all queen property.
+
+#include<bits/stdc++.h>
+using namespace std;
+bool issafe(vector<string> &board,int row,int col,int n)
+{
+    // upper diagonal
+    int tempRow = row;
+    int tempCol = col;
+    while(tempRow >= 0 && tempCol >= 0){
+        if(board[tempRow][tempCol] == 'Q'){
+            return false;
+        }
+        else{
+            tempRow--;
+            tempCol--;
+        }
+    }
+    // left side
+    tempRow = row;
+    tempCol = col;
+    while(tempCol >= 0){
+        if(board[tempRow][tempCol] == 'Q'){
+            return false;
+        }
+        else{
+            tempCol--;
+        }
+    }
+    // lower diagonal
+    tempRow = row;
+    tempCol = col;
+    while(tempRow < n && tempCol >= 0){
+        if(board[tempRow][tempCol] == 'Q'){
+            return false;
+        }
+        else{
+            tempRow++;
+            tempCol--;
+        }
+    }
+    return true;
+}
+void NQueen(vector<string> board,int col,vector<vector<string> > &ans,int n)
+{
+    // base case
+    if(col >= n){
+        ans.push_back(board);
+        return ;
+    }
+    // recursive case
+    for(int row = 0 ; row < n ; row++){
+        if(issafe(board,row,col,n)){
+            board[row][col] = 'Q';
+            NQueen(board,col+1,ans,n);
+            board[row][col] = '.';
+        }
+    }
+}
+int main()
+{
+    int n = 4;
+    // vector<string> design col
+    // board(n) will design rows
+    vector<vector<string> > ans;
+    vector<string> board(n);
+    string s(n,'.');
+    // filling rows in vector at each ith position
+    // this for loop will design rows
+    // 0th . . . . (s)
+    // 1th
+    // 2nd 
+    // 3rd 
+    for(int i = 0 ; i < 4 ; i++){
+        board[i] = s;
+    }
+    // result
+    for(auto it: board){
+        for(auto i: it){
+            cout<<i<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+    // initial board
+    // size of board
+    // starting cols
+    // resultant ans
+    int col = 0;
+    NQueen(board,col,ans,n);
+    for(auto it: ans){
+        for(auto i: it){
+            cout<<i<<endl;
+        }
+        cout<<endl;
+    }
+}
