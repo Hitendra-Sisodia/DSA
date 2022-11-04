@@ -1,0 +1,39 @@
+//phone keypad problem
+#include<bits/stdc++.h>
+using namespace std;
+void solve(string str,string output,int index,vector<string> &ans,string mapping[])
+{
+    // base case
+    if(index >= str.length()){
+        ans.push_back(output);
+        return ;
+    }
+    // recursive case
+    int digit = str[index] - '0';
+    string value = mapping[digit];
+    for(int i = 0 ; i < value.length() ; i++){
+        output.push_back(value[i]);
+        solve(str,output,index+1,ans,mapping);
+        output.pop_back();
+    }
+}
+vector<string> phone(string str)
+{
+    string mapping[] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string> ans;
+    if(str.length() == 0){
+        return ans;
+    }
+    string output = "";
+    int index = 0;
+    solve(str,output,index,ans,mapping);
+    return ans;
+}
+int main()
+{
+    string str = "23";
+    vector<string> finalans = phone(str);
+    for(auto i : finalans){
+        cout<<i<<" ";
+    }
+}
