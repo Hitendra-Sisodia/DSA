@@ -1,0 +1,78 @@
+// rat in maze
+#include<bits/stdc++.h>
+using namespace std;
+bool issafe(vector<vector<int> > matrix,int n,int x,int y,vector<vector<int> > mapping)
+{
+    if((x >= 0 && x < n) && (y >= 0 && y < n) && matrix[x][y] == 1 && mapping[x][y] == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+void solve(vector<vector<int> > matrix,string output,int n,int x,int y,vector<string> &ans,vector<vector<int> > mapping)
+{
+    // base case
+    if(x == n-1 && y == n-1){
+        ans.push_back(output);
+        return ;
+    }
+    mapping[x][y] = 1;
+    // down step
+    int newx = x + 1;
+    int newy = y;
+    if(issafe(matrix,n,newx,newy,mapping)){
+        output.push_back('D');
+        solve(matrix,output,n,newx,newy,ans,mapping);
+        output.pop_back();
+    }
+    // left step
+    newx = x;
+    newy = y - 1;
+    if(issafe(matrix,n,newx,newy,mapping)){
+        output.push_back('L');
+        solve(matrix,output,n,newx,newy,ans,mapping);
+        output.pop_back();
+    }
+    // right step
+    newx = x;
+    newy = y + 1;
+    if(issafe(matrix,n,newx,newy,mapping)){
+        output.push_back('R');
+        solve(matrix,output,n,newx,newy,ans,mapping);
+        output.pop_back();
+    }
+    // up step
+    newx = x - 1;
+    newy = y;
+    if(issafe(matrix,n,newx,newy,mapping)){
+        output.push_back('U');
+        solve(matrix,output,n,newx,newy,ans,mapping);
+        output.pop_back();
+    }
+    mapping[x][y] = 0;
+}
+vector<string> rat(vector<vector<int> > matrix,int n)
+{   
+    // initial position of rat
+    int srcx = 0;
+    int srcy = 0;
+    vector<vector<int> > mapping = matrix;
+    for(int i = 0; i < n ; i++){
+        for(int j = 0 ; j < n ; j++){
+            mapping[i][j] = 0;
+        }
+    }
+    vector<string> ans;
+    string output = "";
+    solve(matrix,output,n,srcx,srcy,ans,mapping);
+    return ans;
+}
+int main()
+{
+    vector<vector<int> > matrix = {{1,0,0,0},{1,1,0,1},{1,1,0,0},{0,1,1,1}};
+    vector<string> finalans = rat(matrix,4);
+    for(auto i : finalans){
+        cout<<i<<endl;
+    }
+}
