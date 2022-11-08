@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool solve(vector<int> arr,int output,int bucketNum,int requiredSubsetSum,int index,int k,vector<int> &visited)
+{
+    // if we reaches to k+1 bucket then we gets all required bucket
+    if(bucketNum == k+1){
+        return true;
+    }
+    if(output == requiredSubsetSum){
+        return solve(arr,0,bucketNum+1,requiredSubsetSum,0,k,visited);
+    }
+    if(output > requiredSubsetSum){
+        return false;
+    }
+    if(index >= arr.size()){
+        return false;
+    }
+    // this condition means we get out first bucket of required sum
+    if(visited[index] == 1){
+        return solve(arr,output,bucketNum,requiredSubsetSum,index+1,k,visited);
+    }
+    else{
+        output += arr[index];
+        visited[index] = 1;
+        bool op1 = solve(arr,output,bucketNum,requiredSubsetSum,index+1,k,visited);
+        visited[index] = 0;
+        output -= arr[index];
+        bool op2 = solve(arr,output,bucketNum,requiredSubsetSum,index+1,k,visited);
+        return op1 || op2;
+    }
+}
+bool kEqualSum(vector<int> arr,int k,int requiredSubsetSum)
+{
+    int index = 0;
+    int output = 0;
+    int bucketNum = 1;
+    vector<int> visited(arr.size(),0);
+    return solve(arr,output,bucketNum,requiredSubsetSum,index,k,visited);
+}
+bool canPartitionKSubsets(vector<int> nums, int k) {
+    int RequiredsubsetSum = 0;
+    for(auto it : nums){
+        RequiredsubsetSum += it;
+    }
+    if(RequiredsubsetSum % k != 0){
+        return false;
+    }
+    return kEqualSum(nums,k,RequiredsubsetSum/k);
+}
+int main()
+{
+    vector<int> arr = {4,3,2,3,5,2,1};
+    int k = 4;
+    cout<<canPartitionKSubsets(arr,k);
+    
+}
